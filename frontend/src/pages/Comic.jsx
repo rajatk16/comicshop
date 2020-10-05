@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-
-import data from '../assets/data.json';
+import Axios from 'axios';
 
 import Rating from '../components/Rating';
 
 const Comic = ({match}) => {
-  const comic = data.comics.find(comic => comic.id === match.params.comicId)
-  return (
+  const [comic, setComic] = useState(null);
+
+  useEffect(() => {
+    const fetchComic = async () => {
+      const response = await Axios.get(`/api/comics/${match.params.comicId}`)
+      if (response) {
+        setComic(response.data)
+      }
+    }
+    fetchComic()
+  }, [match.params.comicId])
+
+  return comic ? (
     <>
       <Link className="btn btn-dark my-3" to="/">
         Go Back
@@ -44,16 +54,16 @@ const Comic = ({match}) => {
                 <ListGroup.Item style={{display: 'flex', flexDirection: 'row'}}>
                   <Col>
                     Art By
-                    {comic.talent.artby.map(person => (
-                      <Row>
+                    {comic.talent.artby.map((person, i) => (
+                      <Row key={`${person}-${i}`}>
                         {person}
                       </Row>
                     ))}
                   </Col>
                   <Col>
                     Written By
-                    {comic.talent.writtenby.map(person => (
-                      <Row>
+                    {comic.talent.writtenby.map((person, i) => (
+                      <Row key={`${person}-${i}`}>
                         {person}
                       </Row>
                     ))}
@@ -67,8 +77,8 @@ const Comic = ({match}) => {
               Starring
             </Card.Title>
             <Card.Body style={{textAlign: 'center'}}>
-              {comic.starring.map(star => (
-                <Card.Text>
+              {comic.starring.map((star, i) => (
+                <Card.Text key={`${star}-${i}`}>
                   {star}
                 </Card.Text>
               ))}
@@ -83,6 +93,8 @@ const Comic = ({match}) => {
         </Col>
       </Row>
     </>
+  ) : (
+    <p>Loading...</p>
   )
 }
 

@@ -1,7 +1,30 @@
 {
+  "name": "comicshop",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "MERN Stack E-Commerce App to \"buy\" comics",
+  "main": "server.js",
+  "repository": "https://github.com/rajatk16/comicshop.git",
+  "author": "Rajat S <rajat.sudagade@gmail.com>",
+  "license": "MIT",
+  "private": false,
   "dependencies": {
-    "moment": "^2.29.0",
-    "react-router-bootstrap": "^0.25.0",
-    "react-router-dom": "^5.2.0"
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.10.7"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "data:import": "node backend/seeder -i",
+    "data:destroy": "node backend/seeder -d"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
   }
 }

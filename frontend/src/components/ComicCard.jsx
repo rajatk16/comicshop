@@ -8,11 +8,11 @@ import Rating from './Rating';
 const ComicCard = ({comic}) => {
   return (
     <Card className="my-3 p-3 rounded">
-      <Link to={`/comics/${comic.id}`}>
+      <Link to={`/comics/${comic._id}`}>
         <Card.Img src={comic.imageURL} variant="top" />
       </Link>
       <Card.Body>
-        <Link to={`/comics/${comic.id}`}>
+        <Link to={`/comics/${comic._id}`}>
           <Card.Title as="div">
             <strong>
               {comic.title}
