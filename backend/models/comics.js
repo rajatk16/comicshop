@@ -70,4 +70,4 @@ const comicSchema = new mongoose.Schema({
 
 const Comic = mongoose.model('Comic', comicSchema);
 
-export default Comic
+export {Comic}

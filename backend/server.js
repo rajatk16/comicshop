@@ -4,15 +4,16 @@ import colors from 'colors';
 
 dotenv.config();
 import connectDB from './config/db.js';
-import comicRoutes from './routes/comics.js';
-import {notFound, errorHandler} from './middlewares/error.js';
+import {comicRoutes, userRoutes} from './routes/index.js';
+import {notFound, errorHandler} from './middlewares/index.js';
 
 connectDB();
 
 const server = express();
-
+server.use(express.json())
 
 server.use('/api/comics', comicRoutes)
+server.use('/api/users', userRoutes)
 
 server.use(notFound)
 server.use(errorHandler)
