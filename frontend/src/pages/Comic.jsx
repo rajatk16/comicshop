@@ -19,7 +19,7 @@ const Comic = ({match}) => {
 
   return comic ? (
     <>
-      <Link className="btn btn-dark my-3" to="/">
+      <Link className="btn btn-dark my-5" to="/">
         Go Back
       </Link>
       {loading 
